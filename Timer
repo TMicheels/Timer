@@ -1,0 +1,81 @@
+
+import javax.swing.JFrame; 
+import javax.swing.JPanel; 
+import javax.swing.JButton; 
+import java.awt.BorderLayout; 
+import java.awt.FlowLayout; 
+import java.awt.Graphics; 
+import java.awt.event.ActionListener; 
+import java.awt.event.ActionEvent; 
+
+public class Timer extends JFrame implements ActionListener
+{
+   private int seconds = 0; 
+   private boolean timerOn = true; 
+   
+   public static final int WIDTH = 100; 
+   public static final int HEIGHT = 100; 
+   public static final int FILL_WIDTH = 100; 
+   public static final int FILL_HEIGHT = 100; 
+   public static final int PAUSE = 100; //milliseconds
+   
+   private JPanel box; 
+   
+   public static void main (String[] args)
+   {
+      Timer gui = new Timer(); 
+      gui.setVisible(true);
+   }
+   public Timer()
+   {
+      setSize(WIDTH, HEIGHT);; 
+      setTitle("Timer");
+      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      setLayout(new BorderLayout());
+      box = new JPanel();
+      add(box, "Center"); 
+      
+      JPanel buttonPanel = new JPanel(); 
+      buttonPanel.setLayout(new FlowLayout());
+      JButton startButton = new JButton("Start/Stop"); 
+      startButton.addActionListener(this); 
+      buttonPanel.add(startButton); 
+      add(buttonPanel, "South"); 
+   }
+   public void runTimer()
+   {
+      while(true)
+      {
+         if(this.seconds < 1000)
+         {
+            seconds++; 
+         }
+      }
+   }
+   public void startTimer()
+   {
+      this.start(); 
+   }
+   
+   public void stopTimer()
+   {
+      this.stop();
+   }
+   public void doNothing(int milliseconds)
+   {
+      try
+      {
+         Thread.sleep(milliseconds);
+      } 
+      catch(InterruptedException e)
+      {
+         System.out.println("unexpected interrupt"); 
+         System.exit(0);
+      }
+   }
+   @Override
+   public void actionPerformed(ActionEvent e)
+   {
+      System.exit(0);
+   }
+}
